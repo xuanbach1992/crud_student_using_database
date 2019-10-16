@@ -5,7 +5,7 @@ include_once "../class/Students.php";
 $manager = new StudentMananger();
 $id = $_GET["id"];
 $student = $manager->getStudentById($id);
-var_dump($student->image);die();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,7 +17,7 @@ var_dump($student->image);die();
     <title>Document</title>
 </head>
 <body>
-<form action="update.php" method="get" enctype="multipart/form-data">
+<form action="update.php" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>ID</td>

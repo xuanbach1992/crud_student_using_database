@@ -17,7 +17,7 @@ class StudentMananger
         $result = $stmt->fetchAll();
         $students = [];
         foreach ($result as $value) {
-            $student = new Students($value['name'], $value['class'], $value["age"],$value["image"]);
+            $student = new Students($value['name'], $value['class'], $value["age"], $value["image"]);
             $student->id = $value["id"];
             array_push($students, $student);
         }
@@ -54,11 +54,11 @@ class StudentMananger
 
     function getStudentById($id)
     {
-        $stmt = $this->connect->prepare('SELECT name,class,age FROM studens WHERE id=:id');
+        $stmt = $this->connect->prepare('SELECT name,class,age,image FROM studens WHERE id=:id');
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetch();
-        $student = new Students($result["name"], $result["class"], $result["age"],$result["image"]);
+        $student = new Students($result["name"], $result["class"], $result["age"], $result["image"]);
         return $student;
     }
 }
