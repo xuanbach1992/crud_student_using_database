@@ -22,7 +22,7 @@ $manager = new StudentMananger();
     <title>CRUD with php</title>
 </head>
 <body>
-<form action="crud/add.php" method="get">
+<form action="crud/add.php" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>Name</td>
@@ -38,16 +38,20 @@ $manager = new StudentMananger();
             <td><input type="text" name="age" placeholder="age"></td>
         </tr>
         <tr>
+            <td><input type="file" name="image"></td>
+        </tr>
+        <tr>
             <td colspan="2"><input type="submit" value="Thêm sinh viên"></td>
         </tr>
     </table>
 </form>
 <table>
     <tr>
-        <td style="width: 200px">ID</td>
-        <td style="width: 200px">Name</td>
-        <td style="width: 200px">Class</td>
-        <td style="width: 200px">Age</td>
+        <td style="width: 100px">ID</td>
+        <td style="width: 100px">Name</td>
+        <td style="width: 100px">Class</td>
+        <td style="width: 100px">Age</td>
+        <td style="width:100px">Avatar</td>
     </tr>
     <?php
     $students = $manager->getAll();
@@ -57,6 +61,7 @@ $manager = new StudentMananger();
             <td><?php echo $student->name; ?></td>
             <td><?php echo $student->class; ?></td>
             <td><?php echo $student->age; ?></td>
+            <td style="height: 150px;width: 150px"><img src="upload/<?php echo $student->image; ?>" alt="image Student Id<?php echo $student->id ?>"></td>
             <td><a href="crud/edit.php?id=<?php echo $student->id ?>">Edit</a></td>
             <td><a href="crud/del.php?id=<?php echo $student->id ?>" onClick="return confirm('Delete user Student?')">Del</a>
             </td>

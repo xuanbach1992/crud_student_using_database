@@ -17,7 +17,7 @@ class StudentMananger
         $result = $stmt->fetchAll();
         $students = [];
         foreach ($result as $value) {
-            $student = new Students($value['name'], $value['class'], $value["age"]);
+            $student = new Students($value['name'], $value['class'], $value["age"],$value["image"]);
             $student->id = $value["id"];
             array_push($students, $student);
         }
@@ -26,10 +26,11 @@ class StudentMananger
 
     function add($student)
     {
-        $stmt = $this->connect->prepare("INSERT INTO studens (name,class,age) VALUES (:name,:class,:age)");
+        $stmt = $this->connect->prepare("INSERT INTO studens (name,class,age,image) VALUES (:name,:class,:age,:image)");
         $stmt->bindParam(":name", $student->name);
         $stmt->bindParam(":class", $student->class);
         $stmt->bindParam(":age", $student->age);
+        $stmt->bindParam(":image", $student->image);
         $stmt->execute();
     }
 
@@ -42,10 +43,11 @@ class StudentMananger
 
     function update($id, $student)
     {
-        $stmt = $this->connect->prepare('UPDATE studens SET name=:name,class=:class, age=:age WHERE id=:id');
+        $stmt = $this->connect->prepare('UPDATE studens SET name=:name,class=:class, age=:age,image=:image WHERE id=:id');
         $stmt->bindParam(":name", $student->name);
         $stmt->bindParam(":class", $student->class);
         $stmt->bindParam(":age", $student->age);
+        $stmt->bindParam(":image", $student->image);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
@@ -56,7 +58,7 @@ class StudentMananger
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetch();
-        $student = new Students($result["name"], $result["class"], $result["age"]);
+        $student = new Students($result["name"], $result["class"], $result["age"],$result["image"]);
         return $student;
     }
 }

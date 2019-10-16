@@ -5,6 +5,7 @@ include_once "../class/Students.php";
 $manager = new StudentMananger();
 $id = $_GET["id"];
 $student = $manager->getStudentById($id);
+var_dump($student->image);die();
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,7 +17,7 @@ $student = $manager->getStudentById($id);
     <title>Document</title>
 </head>
 <body>
-<form action="update.php" method="get">
+<form action="update.php" method="get" enctype="multipart/form-data">
     <table>
         <tr>
             <td>ID</td>
@@ -34,6 +35,11 @@ $student = $manager->getStudentById($id);
         <tr>
             <td>Age</td>
             <td><input type="text" name="age" placeholder="Age" value="<?php echo $student->age ?>"></td>
+        </tr>
+        <tr>
+            <td>image</td>
+            <td><img src="../upload/<?php echo $student->image ?>" alt="<?php echo $id ?>"><input type="file" name="image">
+            </td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Cập nhật danh sách"></td>
